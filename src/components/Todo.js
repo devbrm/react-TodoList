@@ -17,7 +17,7 @@ export default class Todo extends Component {
   }
 
   componentWillMount = () => {
-    if (!localStorage.getItem("items")) {
+    if (!localStorage.getItem("items") === "[]") {
       localStorage.setItem(
         "items",
         JSON.stringify([
