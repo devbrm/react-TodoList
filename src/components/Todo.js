@@ -13,10 +13,11 @@ export default class Todo extends Component {
     super(props);
     this.state = {
       input: "",
+      items: []
     };
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     if (localStorage.getItem("items") === "[]") {
       localStorage.setItem(
         "items",
