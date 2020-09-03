@@ -13,7 +13,7 @@ export default class Todo extends Component {
     super(props);
     this.state = {
       input: "",
-      items: []
+      items: [],
     };
   }
 
@@ -71,14 +71,13 @@ export default class Todo extends Component {
   toggleCheck = (id) => {
     const { items } = this.state;
     this.setState({
-      items: 
-      this.usingLocalStorage(
-      items.map((item) => {
-        if (item.id === id) {
-          item.isCompleted = !item.isCompleted;
-        }
-        return item;
-      })
+      items: this.usingLocalStorage(
+        items.map((item) => {
+          if (item.id === id) {
+            item.isCompleted = !item.isCompleted;
+          }
+          return item;
+        })
       ),
     });
   };
