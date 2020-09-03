@@ -18,6 +18,7 @@ export default class Todo extends Component {
   }
 
   componentDidMount = () => {
+    this.setState({ isMounted: false });
     if (localStorage.getItem("items") === "[]") {
       localStorage.setItem(
         "items",
@@ -33,6 +34,7 @@ export default class Todo extends Component {
     }
     const data = JSON.parse(localStorage.getItem("items"));
     this.setState({ items: data });
+    this.setState({ isMounted: true });
   };
 
   handleChange = (e) => {
@@ -98,11 +100,13 @@ export default class Todo extends Component {
             Add
           </button>
         </form>
-        <TodoItems
-          toggleCheck={this.toggleCheck}
-          deleteItem={this.deleteTodo}
-          items={this.state.items}
-        />
+        {this.state.isMounted && (
+          <TodoItems
+            toggleCheck={this.toggleCheck}
+            deleteItem={this.deleteTodo}
+            items={this.state.items}
+          />
+        )}
       </div>
     );
   }
