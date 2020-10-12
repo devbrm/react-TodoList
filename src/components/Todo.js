@@ -19,7 +19,7 @@ export default class Todo extends Component {
 
   componentDidMount = () => {
     this.setState({ isMounted: false });
-    if (localStorage.getItem("items") === "[]") {
+    if (!localStorage.getItem("items")) {
       localStorage.setItem(
         "items",
         JSON.stringify([
@@ -50,11 +50,12 @@ export default class Todo extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.input.match(/[\s\d\W_]+/g) || this.state.input === "")
-      return;
+    let { input } = this.state;
+    input = input.trim();
+    if (input.match(/[^\s\da-z]+/g) || input === "") return;
     const { items } = this.state;
     const id = items.length ? items[items.length - 1].id + 1 : 1;
-    const item = { id, title: this.state.input, isCompleted: false };
+    const item = { id, title: input, isCompleted: false };
     this.setState({
       items: this.usingLocalStorage([...items, item]),
       input: "",
